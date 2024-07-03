@@ -41,7 +41,7 @@
 </head>
 <body>
     <form id="redirectForm" onsubmit="redirectIf123456(event)">
-        <label for="userInput">Enter '123456' to redirect to Google:</label>
+        <label for="userInput">Enter The Admin Password</label>
         <input type="text" id="userInput" name="userInput">
         <br>
         <input type="submit" value="Submit">
@@ -55,7 +55,7 @@
             if (userInput === '123456') {
                 window.location.href = 'https://google.com';
             } else {
-                alert('Input is not "123456". Please enter "123456" to redirect.');
+                alert('Incorrect Password');
             }
         }
     </script>
