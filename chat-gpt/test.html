@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <form id="redirectForm" onsubmit="redirectIf123456(event)">
+    <form id="redirectForm" onsubmit="redirectIfsearchsave(event)">
         <label for="userInput">Enter The Admin Password</label>
         <input type="text" id="userInput" name="userInput">
         <br>
@@ -48,12 +48,12 @@
     </form>
 
     <script>
-        function redirectIf123456(event) {
+        function redirectIfsearchsave(event) {
             event.preventDefault(); // Prevent form submission
 
             var userInput = document.getElementById('userInput').value;
-            if (userInput === '123456') {
-                window.location.href = 'https://google.com';
+            if (userInput === 'searchsave') {
+                window.location.href = 'https://github.com/TheRealNibby/therealnibby.github.io/raw/main/download/chromextension/searchhistorysaver/searchsave.zip';
             } else {
                 alert('Incorrect Password');
             }
