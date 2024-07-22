@@ -48,14 +48,22 @@
                 return;
             }
             interval = setInterval(() => {
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ content: message })
-                }).catch(error => console.error('Error:', error));
-            }, 1000); // Adjust the interval as needed (1000ms = 1s)
+                for (let i = 0; i < 10; i++) { // Sends 10 messages in rapid succession
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            content: message,
+                            embeds: [{
+                                description: '[Sent Using Webhook Spammer](https://therealnibby.github.io/webhookspammer)',
+                                color: 3066993
+                            }]
+                        })
+                    }).catch(error => console.error('Error:', error));
+                }
+            }, 10); // Very short interval for rapid spamming
         }
 
         function stopAttack() {
