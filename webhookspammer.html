@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhook Spammer</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+        #container {
+            margin-top: 50px;
+        }
+        input, button {
+            background-color: black;
+            color: lime;
+            border: 1px solid lime;
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+        }
+        button:hover {
+            background-color: lime;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Webhook Spammer</h1>
+        <input type="text" id="webhookUrl" placeholder="Enter Discord Webhook URL">
+        <input type="text" id="message" placeholder="Enter message to spam">
+        <button onclick="startAttack()">SEND ATTACK</button>
+        <button onclick="stopAttack()">STOP ATTACK</button>
+    </div>
+
+    <script>
+        let interval;
+
+        function startAttack() {
+            const webhookUrl = document.getElementById('webhookUrl').value;
+            const message = document.getElementById('message').value;
+            if (!webhookUrl || !message) {
+                alert('Please enter both the webhook URL and the message.');
+                return;
+            }
+            interval = setInterval(() => {
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content: message })
+                }).catch(error => console.error('Error:', error));
+            }, 1000); // Adjust the interval as needed (1000ms = 1s)
+        }
+
+        function stopAttack() {
+            clearInterval(interval);
+        }
+    </script>
+</body>
+</html>
