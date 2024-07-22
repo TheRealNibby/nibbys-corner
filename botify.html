@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Bot Token Input</title>
+    <title>Discord Bot Token and Status</title>
     <style>
         body {
             background-color: #2c2f33;
@@ -59,6 +59,7 @@
         <input type="text" id="tokenInput" placeholder="Enter your bot token here">
         <input type="text" id="statusInput" placeholder="Type custom bot status here">
         <button onclick="submitToBot()">Submit to Bot</button>
+        <button onclick="forceBotOnline()">Force Bot Online</button>
     </div>
 
     <script>
@@ -66,4 +67,22 @@
             const token = document.getElementById('tokenInput').value;
             const status = document.getElementById('statusInput').value;
             if (token && status) {
-                alert('Token submitted: ' + token + '\​⬤
+                alert('Token submitted: ' + token + '\nCustom Status: ' + status);
+                // Here you can add code to handle the submission, e.g., sending data to your server or bot
+            } else {
+                alert('Please enter both a token and a custom status.');
+            }
+        }
+
+        function forceBotOnline() {
+            const token = document.getElementById('tokenInput').value;
+            if (token) {
+                alert('Bot is being forced online with token: ' + token);
+                // Here you can add code to handle forcing the bot online, e.g., sending a request to your server or bot
+            } else {
+                alert('Please enter a token to force the bot online.');
+            }
+        }
+    </script>
+</body>
+</html>
