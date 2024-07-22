@@ -67,8 +67,16 @@
             const token = document.getElementById('tokenInput').value;
             const status = document.getElementById('statusInput').value;
             if (token && status) {
-                alert('Token submitted: ' + token + '\nCustom Status: ' + status);
-                // Here you can add code to handle the submission, e.g., sending data to your server or bot
+                fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token: token, status: status })
+                })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => alert('Error: ' + error));
             } else {
                 alert('Please enter both a token and a custom status.');
             }
@@ -77,8 +85,16 @@
         function forceBotOnline() {
             const token = document.getElementById('tokenInput').value;
             if (token) {
-                alert('Bot is being forced online with token: ' + token);
-                // Here you can add code to handle forcing the bot online, e.g., sending a request to your server or bot
+                fetch('/force-online', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token: token })
+                })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => alert('Error: ' + error));
             } else {
                 alert('Please enter a token to force the bot online.');
             }
