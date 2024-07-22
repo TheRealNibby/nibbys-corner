@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Webhook Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #7289da;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5a6fb2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Discord Webhook URL</h2>
+        <form id="webhookForm">
+            <input type="text" id="webhookUrl" name="webhookUrl" placeholder="https://discord.com/api/webhooks/..." required>
+            <textarea id="webhookMessage" name="webhookMessage" placeholder="Enter your message here..." rows="4" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById('webhookForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const webhookUrl = document.getElementById('webhookUrl').value;
+            const webhookMessage = document.getElementById('webhookMessage').value;
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content: webhookMessage }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('responseMessage').innerText = 'Message sent successfully!';
+            })
+            .catch(error => {
+                document.getElementById('responseMessage').innerText = 'Error sending message. Please check the webhook URL.';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
