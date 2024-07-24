@@ -17,12 +17,17 @@
             height: 100vh;
         }
 
-        .container {
+        .container, .connected {
             text-align: center;
             padding: 30px;
             border-radius: 10px;
             background-color: #2c2f33;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none; /* Hide by default */
+        }
+
+        .container {
+            display: block; /* Show the container initially */
         }
 
         input[type="text"] {
@@ -59,14 +64,54 @@
 </head>
 <body>
     <div class="container">
-        <input type="text" placeholder="ENTER WEBHOOK URL" >
-        <button>Connect</button>
+        <input type="text" id="webhook-url" placeholder="ENTER WEBHOOK URL">
+        <button id="connect-button">Connect</button>
+    </div>
+
+    <div class="connected" id="connected-container">
+        <p id="connected-message"></p>
+        <input type="text" id="message-to-send" placeholder="Enter your message">
+        <button id="send-button">Send</button>
     </div>
 
     <script>
-        // Example JavaScript code
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded and DOM fully parsed.');
+            const connectButton = document.getElementById('connect-button');
+            const webhookUrlInput = document.getElementById('webhook-url');
+            const connectedContainer = document.getElementById('connected-container');
+            const connectedMessage = document.getElementById('connected-message');
+            const sendButton = document.getElementById('send-button');
+            const messageInput = document.getElementById('message-to-send');
+
+            connectButton.addEventListener('click', function() {
+                const webhookUrl = webhookUrlInput.value;
+                if (webhookUrl) {
+                    // Hide login page and show connected page
+                    document.querySelector('.container').style.display = 'none';
+                    connectedContainer.style.display = 'block';
+                    connectedMessage.textContent = `Connected to ${webhookUrl}`;
+
+                    sendButton.addEventListener('click', function() {
+                        const message = messageInput.value;
+                        if (message) {
+                            fetch(webhookUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ content: message })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Success:', data);
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>
