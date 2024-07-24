@@ -86,29 +86,49 @@
             connectButton.addEventListener('click', function() {
                 const webhookUrl = webhookUrlInput.value;
                 if (webhookUrl) {
-                    // Hide login page and show connected page
-                    document.querySelector('.container').style.display = 'none';
-                    connectedContainer.style.display = 'block';
-                    connectedMessage.textContent = `Connected to ${webhookUrl}`;
-
-                    sendButton.addEventListener('click', function() {
-                        const message = messageInput.value;
-                        if (message) {
-                            fetch(webhookUrl, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ content: message })
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log('Success:', data);
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
+                    // Test the webhook URL to check if it exists and get its name
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ content: 'Test message' })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Assume the webhook URL returns its name in a JSON response
+                            return response.json().then(data => {
+                                const webhookName = data.name || 'Unknown Webhook'; // Adjust based on your API
+                                document.querySelector('.container').style.display = 'none';
+                                connectedContainer.style.display = 'block';
+                                connectedMessage.textContent = `Connected to ${webhookName}`;
+                                
+                                sendButton.addEventListener('click', function() {
+                                    const message = messageInput.value;
+                                    if (message) {
+                                        fetch(webhookUrl, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ content: message })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log('Success:', data);
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error);
+                                        });
+                                    }
+                                });
                             });
+                        } else {
+                            alert('Invalid URL. Please enter a real webhook URL.');
                         }
+                    })
+                    .catch(() => {
+                        alert('Invalid URL. Please enter a real webhook URL.');
                     });
                 }
             });
