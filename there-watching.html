@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>They're Watching You</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #0d0d0d;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 50px;
+        }
+        .glitch {
+            font-size: 3rem;
+            color: red;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.75);
+            animation: glitch 1.5s infinite;
+        }
+        @keyframes glitch {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 0, 0, 0.75), 5px 5px 10px rgba(0, 255, 0, 0.75), -5px -5px 10px rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 5px 5px 10px rgba(255, 0, 0, 0.75), -5px -5px 10px rgba(0, 255, 0, 0.75), 5px 5px 10px rgba(0, 0, 255, 0.75);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(255, 0, 0, 0.75), 5px 5px 10px rgba(0, 255, 0, 0.75), -5px -5px 10px rgba(0, 0, 255, 0.75);
+            }
+        }
+        .info {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+        .warning {
+            margin-top: 50px;
+            font-size: 1rem;
+            color: #ff6666;
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch">Hackers Are Everywhere. They're Watching You.</div>
+    <div class="info">
+        <p id="ip">IP Address: ...</p>
+        <p id="location">Location: ...</p>
+    </div>
+    <div class="warning">
+        Imagine what more they could learn.<br>
+        Protect your privacy online.
+    </div>
+
+    <script>
+        fetch('http://ip-api.com/json/')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('ip').innerText = `IP Address: ${data.query}`;
+            document.getElementById('location').innerText = `Location: ${data.city}, ${data.country}`;
+          });
+    </script>
+</body>
+</html>
