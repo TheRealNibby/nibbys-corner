@@ -118,4 +118,17 @@
                     .catch((error) => console.log('Error sharing:', error));
             } else {
                 // Fallback for browsers that do not support the Web Share API
-                const shareURL =​⬤
+                const fallbackURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`;
+                window.open(fallbackURL, '_blank');
+            }
+        }
+
+        fetch('https://ipinfo.io/45.133.7.36?token=6acb1f40640046')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('ip').innerText = `IP Address: ${data.ip}`;
+            document.getElementById('location').innerText = `Location: ${data.city}, ${data.country}`;
+          });
+    </script>
+</body>
+</html>
