@@ -117,9 +117,7 @@
                     .then(() => console.log('Thanks for sharing!'))
                     .catch((error) => console.log('Error sharing:', error));
             } else {
-                // Fallback for browsers that do not support the Web Share API
-                const fallbackURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`;
-                window.open(fallbackURL, '_blank');
+                alert('Your browser does not support the Web Share API.');
             }
         }
 
