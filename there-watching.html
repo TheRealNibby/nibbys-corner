@@ -54,6 +54,27 @@
         .btn:hover {
             background-color: #ff3333;
         }
+        .share-banner {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            color: #fff;
+        }
+        .share-btn {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #0066cc;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .share-btn:hover {
+            background-color: #004d99;
+        }
     </style>
 </head>
 <body>
@@ -69,6 +90,10 @@
     <div class="disclaimer">
         This webpage does not store your IP address or any personal data. We are committed to your privacy.
     </div>
+    <div class="share-banner">
+        Wanna raise awareness? Share this webpage!
+        <button class="share-btn" onclick="sharePage()">Share</button>
+    </div>
     <button class="btn" onclick="goToRandomVPN()">Go to a Random VPN (Safe VPNs)</button>
 
     <script>
@@ -81,12 +106,16 @@
             window.location.href = randomVPN;
         }
 
-        fetch('https://ipinfo.io/45.133.7.36?token=6acb1f40640046')
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById('ip').innerText = `IP Address: ${data.ip}`;
-            document.getElementById('location').innerText = `Location: ${data.city}, ${data.country}`;
-          });
-    </script>
-</body>
-</html>
+        function sharePage() {
+            const shareData = {
+                title: 'They\'re Watching You',
+                text: 'Let’s stop the bad hackers, Check out this webpage to learn more: https://therealnibby.github.io/there-watching',
+                url: 'https://therealnibby.github.io/there-watching'
+            };
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Thanks for sharing!'))
+                    .catch((error) => console.log('Error sharing:', error));
+            } else {
+                // Fallback for browsers that do not support the Web Share API
+                const shareURL =​⬤
