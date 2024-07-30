@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webhook Request Sender</title>
+</head>
+<body>
+    <h1>Send Webhook Request</h1>
+    <button id="sendRequest">Send Request</button>
+
+    <script>
+        document.getElementById('sendRequest').addEventListener('click', function() {
+            const url = "https://play.svix.com/in/e_BoKXqlY4jDi8LwJyG8ShDnEbeRe/";
+            const payload = {
+                key1: "value1",
+                key2: "value2"
+            };
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
