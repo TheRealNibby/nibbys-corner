@@ -1,31 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Webhook Request Sender</title>
+    <title>Webhook Tester</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #0078d7; /* Windows 10 blue */
+        }
+        .window {
+            background-color: white;
+            width: 600px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+        .title-bar {
+            background-color: #0078d7;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-bar .title {
+            margin: 0;
+            font-size: 16px;
+        }
+        .close-btn {
+            background-color: #ff5f5f;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+    </style>
 </head>
 <body>
-    <h1>Send Webhook Request</h1>
-    <button id="sendRequest">Send Request</button>
+    <div class="window">
+        <div class="title-bar">
+            <span class="title">Webhook Tester</span>
+            <button class="close-btn" onclick="closeWindow()"></button>
+        </div>
+        <div class="content">
+            <p>This is a simulated Windows 10 window with a title bar and a close button.</p>
+        </div>
+    </div>
 
     <script>
-        document.getElementById('sendRequest').addEventListener('click', function() {
-            const url = "https://play.svix.com/in/e_BoKXqlY4jDi8LwJyG8ShDnEbeRe/";
-            const payload = {
-                key1: "value1",
-                key2: "value2"
-            };
-
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch(error => console.error('Error:', error));
-        });
+        function closeWindow() {
+            window.location.href = "https://www.google.com";
+        }
     </script>
 </body>
 </html>
