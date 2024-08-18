@@ -43,32 +43,24 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
         }
 
-        .vibes {
+        .icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
             margin: 2rem 0;
-            font-size: 1.5rem;
         }
 
-        .vibes ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .vibes li {
-            margin: 0.5rem 0;
-            background-color: #1a1a1a;
-            color: #ff00ff;
-            padding: 0.5rem;
-            border-radius: 5px;
-            text-shadow: 2px 2px 4px #000000;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border: 5px solid #ff00ff;
-            border-radius: 10px;
+        .icons img {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #ff00ff;
+            border-radius: 50%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-            margin: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .icons img:hover {
+            transform: scale(1.1);
         }
 
         a {
@@ -87,11 +79,11 @@
     <div class="content">
         <h1>About Me</h1>
 
-        <!-- Add the GIR as a robot image here -->
-        <img src="https://static.miraheze.org/greatcharacterswiki/f/fb/Gfhdfhddghhkfgh.png" alt="GIR as a robot">
-
-        <!-- Add the GIRDOG image here -->
-        <img src="https://static.miraheze.org/greatcharacterswiki/5/59/Girdog_as_GIR%27s_disguise.png" alt="GIRDOG">
+        <!-- Display the GIR images as small icons -->
+        <div class="icons">
+            <img src="https://static.miraheze.org/greatcharacterswiki/f/fb/Gfhdfhddghhkfgh.png" alt="GIR as a robot">
+            <img src="https://static.miraheze.org/greatcharacterswiki/5/59/Girdog_as_GIR%27s_disguise.png" alt="GIRDOG">
+        </div>
 
         <h2>🎸 Who Am I?</h2>
         <p>I'm [Your Name], your resident scene kid in the digital age. Fueled by neon lights and the sound of nostalgia, I'm always in search of the next cool thing. From creating rad Chrome extensions (check out my latest, <a href="#">Chrome Client</a>) to diving deep into the latest tech trends, I'm here to bring some color into your screen.</p>
