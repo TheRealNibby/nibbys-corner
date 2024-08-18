@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input and Display</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            text-align: center;
+            width: 300px;
+            background-color: #333333;
+            color: white;
+        }
+
+        .result {
+            display: none;
+            font-size: 36px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="inputBox" placeholder="Enter text">
+        <div class="result" id="resultText">Digimac 15 Holds The Answer</div>
+    </div>
+
+    <script>
+        const inputBox = document.getElementById('inputBox');
+        const resultText = document.getElementById('resultText');
+
+        inputBox.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                if (inputBox.value.trim().toLowerCase() === 'takere') {
+                    resultText.style.display = 'block';
+                } else {
+                    resultText.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
